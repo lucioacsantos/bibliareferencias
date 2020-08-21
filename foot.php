@@ -5,27 +5,23 @@
 
 ?>
 
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Localizado ao final do documento para acelerar o carregamento -->
+<!-- FOOTER -->
+        <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>2020 Bíblia Referências. &middot; <a href="http://sites.google.com/site/biblialivre" target="_blanck">
+                Bíblia Livre</a> &middot; 
+                <a href="https://creativecommons.org/licenses/by/3.0/br/" target="_blanck">
+                Creative Commons Atribution 3.0 Brasil</a>
+            </p>
+        </footer>
+    </main>
     <?php
-    /* Carrega JS a partir da $url */
-    echo "
-    <script src=\"$url/js/jquery-3.3.1.slim.min.js\"></script>
-    <script>window.jQuery || document.write('<script src=\"$url/js/jquery-slim.min.js\"><\/script>')</script>
-    <script src=\"$url/js/popper.min.js\"></script>
-    <script src=\"$url/js/bootstrap.min.js\"></script>
-    <script src=\"$url/js/holder.min.js\"></script>
-    <script src=\"$url/js/jquery.validate.min.js\"></script>
-
-    <!-- Icons -->
-    <script src=\"$url/js/feather.min.js\"></script>
+    echo"
+    <script src=\"$url/js/jquery-3.5.1.slim.min.js\"></script>
     <script>
-      feather.replace()
-    </script>";
+        window.jQuery || document.write('<script src=\"$url/js/jquery.slim.min.js\"><\/script>')
+    </script>
+    <script src=\"$url/js/bootstrap.bundle.min.js\"></script>";
+    ?>
 
-    ?>      
-   
-  </body>
 </html>

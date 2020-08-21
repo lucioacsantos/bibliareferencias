@@ -4,10 +4,10 @@
 **/
 
 /* Registro de Tabelas e Visões */
-$tb_books="books";
-$tb_testament="testament";
-$tb_verses="verses";
-
+$tb_testamentos="tb_testamentos";
+$tb_livros="tb_livros";
+$tb_versiculos="tb_versiculos";
+$tb_prox_vers="tb_prox_vers";
 
 
 /* Classe MySQLi */
@@ -22,11 +22,16 @@ class ConsultaSQL
         return $query;
     }
 
-    public function update($tabela,$campos,$valores,$condicoes) 
+    public function update($tabela,$campos_valores,$condicoes) 
     {
         require_once "mysqli.class.php";
         $my = new MySQL();
-        $query = $my->exec("UPDATE $tabela SET ($campos) = ($valores) WHERE $condicoes");
+        if ($condicoes){
+            $query = $my->exec("UPDATE $tabela SET $campos_valores WHERE $condicoes");
+        }
+        else{
+            $query = $my->exec("UPDATE $tabela SET $campos_valores ");
+        }
         return $query;
     }
 

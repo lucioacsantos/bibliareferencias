@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sistema Integrado para Centros Locais de Tecnologia da Informação">
+    <meta name="description" content="Bíblia Referências">
     <meta name="author" content="99242991 Lúcio ALEXANDRE Correia dos Santos">
     <?php echo "<link rel=\"icon\" href=\"$url/favicon.ico\">"; ?>
 
@@ -22,18 +22,26 @@
     <!-- Bootstrap core CSS -->
     <link href=\"$url/css/bootstrap.min.css\" rel=\"stylesheet\">
 
-    <!-- Dashboard CSS  -->
-    <link href=\"$url/css/dashboard.css\" rel=\"stylesheet\">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
 
-    <!-- ForValidation CSS  -->
-    <link href=\"$url/css/form-validation.css\" rel=\"stylesheet\">
-
-    <!-- Stylesheet CSS -->
-    <link href=\"$url/css/stylesheet.css\" rel=\"stylesheet\">";
+    <!-- Carousel -->
+    <link href=\"$url/css/carousel.css\" rel=\"stylesheet\">";
 
     ?>
 
   </head>
-
-  <body>
-

@@ -93,7 +93,7 @@ class MySQL
     {
         $result = $this->db -> query($sql);
         if ($this->db -> error) exit($this->db -> error);
-        $this->aff_rows = $result -> affected_rows();
-        return $this->aff_rows;
+        //$this->aff_rows = $result -> affected_rows;
+        //return $this->aff_rows;
     }
 }
