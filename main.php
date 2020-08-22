@@ -7,26 +7,28 @@
 require_once "class/queries.class.php";
 $cns = new ConsultaSQL();
 
-$prox_vers = $cns->select($tb_prox_vers,'','');
+$campos = "*";
+
+$prox_vers = $cns->select($campos,$tb_prox_vers,'','');
 
 $vers_at = $prox_vers->prox_at;
 $vers_nt = $prox_vers->prox_nt;
 $vers_sl_pv = $prox_vers->prox_sl_pv;
 
 $condicoes = "idtb_versiculos = '$vers_at'";
-$vers_at = $cns->select($tb_versiculos,$condicoes,'');
+$vers_at = $cns->select($campos,$tb_versiculos,$condicoes,'');
 $condicoes = "idtb_livros = '$vers_at->idtb_livros'";
-$livro_at = $cns->select($tb_livros,$condicoes,'');
+$livro_at = $cns->select($campos,$tb_livros,$condicoes,'');
 
 $condicoes = "idtb_versiculos = '$vers_nt'";
-$vers_nt = $cns->select($tb_versiculos,$condicoes,'');
+$vers_nt = $cns->select($campos,$tb_versiculos,$condicoes,'');
 $condicoes = "idtb_livros = '$vers_nt->idtb_livros'";
-$livro_nt = $cns->select($tb_livros,$condicoes,'');
+$livro_nt = $cns->select($campos,$tb_livros,$condicoes,'');
 
 $condicoes = "idtb_versiculos = '$vers_sl_pv'";
-$vers_sl_pv = $cns->select($tb_versiculos,$condicoes,'');
+$vers_sl_pv = $cns->select($campos,$tb_versiculos,$condicoes,'');
 $condicoes = "idtb_livros = '$vers_sl_pv->idtb_livros'";
-$livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
+$livro_sl_pv = $cns->select($campos,$tb_livros,$condicoes,'');
 
 ?>
 

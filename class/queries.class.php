@@ -35,43 +35,43 @@ class ConsultaSQL
         return $query;
     }
 
-    public function select($tabela,$condicoes,$ordenacao)
+    public function select($campos,$tabela,$condicoes,$ordenacao)
     {
         require_once "mysqli.class.php";
         $my = new MySQL();
 
         if ($condicoes and $ordenacao){
-            $query = $my->getRow("SELECT * FROM $tabela WHERE $condicoes ORDER BY $ordenacao");
+            $query = $my->getRow("SELECT $campos FROM $tabela WHERE $condicoes ORDER BY $ordenacao");
         }
         elseif ($condicoes and !$ordenacao){
-            $query = $my->getRow("SELECT * FROM $tabela WHERE $condicoes");
+            $query = $my->getRow("SELECT $campos FROM $tabela WHERE $condicoes");
         }
         elseif (!$condicoes and $ordenacao){
-            $query = $my->getRow("SELECT * FROM $tabela ORDER BY $ordenacao");
+            $query = $my->getRow("SELECT $campos FROM $tabela ORDER BY $ordenacao");
         }
         else{
-            $query = $my->getRow("SELECT * FROM $tabela");
+            $query = $my->getRow("SELECT $campos FROM $tabela");
         }
         
         return $query;
     }
 
-    public function selectMulti($tabela,$condicoes,$ordenacao)
+    public function selectMulti($campos,$tabela,$condicoes,$ordenacao)
     {
         require_once "mysqli.class.php";
         $my = new MySQL();
 
         if ($condicoes and $ordenacao){
-            $query = $my->getRows("SELECT * FROM $tabela WHERE $condicoes ORDER BY $ordenacao");
+            $query = $my->getRows("SELECT $campos FROM $tabela WHERE $condicoes ORDER BY $ordenacao");
         }
         elseif ($condicoes and !$ordenacao){
-            $query = $my->getRows("SELECT * FROM $tabela WHERE $condicoes");
+            $query = $my->getRows("SELECT $campos FROM $tabela WHERE $condicoes");
         }
         elseif (!$condicoes and $ordenacao){
-            $query = $my->getRows("SELECT * FROM $tabela ORDER BY $ordenacao");
+            $query = $my->getRows("SELECT $campos FROM $tabela ORDER BY $ordenacao");
         }
         else{
-            $query = $my->getRows("SELECT * FROM $tabela");
+            $query = $my->getRows("SELECT $campos FROM $tabela");
         }
 
         return $query;
