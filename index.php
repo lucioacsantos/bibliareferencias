@@ -11,8 +11,6 @@ error_reporting(E_ALL);*/
 require_once "class/queries.class.php";
 $cns = new ConsultaSQL();
 
-$url = 'http://localhost/bibliareferencias/';
-
 /* Carrega Estrutura das Páginas */
 include "head.php";
 

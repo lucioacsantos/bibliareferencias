@@ -11,7 +11,8 @@
             <p>2020 Bíblia Referências. &middot; <a href="http://sites.google.com/site/biblialivre" target="_blanck">
                 Bíblia Livre</a> &middot; 
                 <a href="https://creativecommons.org/licenses/by/3.0/br/" target="_blanck">
-                Creative Commons Atribution 3.0 Brasil</a>
+                Creative Commons Atribution 3.0 Brasil</a> &middot; 
+                <a href="https://br.freepik.com/fotos/acondicionamento">br.freepik.com</a>
             </p>
         </footer>
     </main>

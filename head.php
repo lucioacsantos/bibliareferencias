@@ -3,6 +3,8 @@
 *** 99242991 | Lúcio ALEXANDRE Correia dos Santos
 **/
 
+$url = 'http://localhost/bibliareferencias/';
+
 ?>
 
 <!doctype html>

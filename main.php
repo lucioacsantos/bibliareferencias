@@ -29,9 +29,10 @@ $condicoes = "idtb_livros = '$vers_sl_pv->idtb_livros'";
 $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
 
 ?>
-    <!-- Container Carousel -->
 
     <main role="main">
+
+        <!-- Container Carousel -->
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -41,7 +42,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/fundo_carousel_1.jpg" />
+                    <img src="img/fundo_carousel_1a.jpg" />
                     <div class="container">
                         <div class="carousel-caption text-left">
                             <h1>Antigo Testamento</h1>
@@ -54,7 +55,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/fundo_carousel_4.jpg" />
+                    <img src="img/fundo_carousel_4a.jpg" />
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>Novo Testamento</h1>
@@ -67,7 +68,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/fundo_carousel_3.jpg" />
+                    <img src="img/fundo_carousel_3a.jpg" />
                     <div class="container">
                         <div class="carousel-caption text-right">
                             <h1>Salmos e Provérbios.</h1>
@@ -90,6 +91,8 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
             </a>
         </div>
 
+        <!-- Fim Container Carousel -->
+
         <!-- Container Conteúdo -->
 
         <div class="container marketing">
@@ -97,7 +100,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
             <!-- Três colunas abaixo do carousel -->
             <div class="row">
                 <div class="col-lg-4">
-                    
+                    <img src="img/biblia03.png" height="140px" width="140px" />
                     <h2>NVI</h2>
                     <p>Nova Versão Internacional.</p>
                     <p><a class="btn btn-secondary" href="https://pt.wikipedia.org/wiki/Nova_Vers%C3%A3o_Internacional" 
@@ -105,7 +108,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
                 </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    
+                    <img src="img/biblia02.png" height="140px" width="140px" />
                     <h2>ACF</h2>
                     <p>Almeida Corrigida e Fiel.</p>
                     <p><a class="btn btn-secondary" href="https://pt.wikipedia.org/wiki/Almeida_Corrigida_Fiel" 
@@ -113,7 +116,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
                 </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    
+                    <img src="img/biblia01.png" height="140px" width="140px" />
                     <h2>ARA</h2>
                     <p>Almeida Revista e Atualizada.</p>
                     <p><a class="btn btn-secondary" href="https://pt.wikipedia.org/wiki/Almeida_Revista_e_Atualizada" 
@@ -174,7 +177,7 @@ $livro_sl_pv = $cns->select($tb_livros,$condicoes,'');
                 </div>
             </div>
 
-            <hr class="featurette-divider">
+            <hr class="featurette-divider">-->
 
             <!-- /Final dos Destaques -->
 
