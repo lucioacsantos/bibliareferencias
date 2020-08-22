@@ -116,7 +116,7 @@ include "top_main.php";
 
             <div class="row featurette">
                 <div class="col-md-7">
-                <h2>Proféticos</h2>
+                <h2>Proféticos - Profetas Menores</h2>
                     <p>Este é o último grupo de livros do antigo testamento e está dividido em 12 livros que contam a 
                         história e ministérios de 12 grandes profetas de Israel.</p>
                     <p><a class="btn btn-secondary" href="#" role="button">Ośeias &raquo;</a>
