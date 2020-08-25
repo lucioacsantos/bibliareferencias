@@ -53,7 +53,7 @@ include "top_main.php";
     <div class="row featurette">
         <div class="col-md-7">
             <h2><?php print $livro->nome; ?></h2>
-            <p><?php print $livro->descricao; ?>.</p>
+            <p><?php print $livro->descricao; ?></p>
             <p class="btn btn-secondary" role="button">Capítulos &raquo;</p>
             <p>
             <?php
@@ -65,7 +65,14 @@ include "top_main.php";
             </p>
         </div>
         <div class="col-md-5">
-            <img src="img/evangelhos.png" />
+            <?php
+                if ($livro->idtb_testamentos == '1'){
+                    echo "<img src=\"img/antigotestamento.png\" />";
+                }
+                else{
+                    echo "<img src=\"img/novotestamento.png\" />";
+                }
+            ?>
         </div>
     </div>
 
@@ -76,16 +83,16 @@ include "top_main.php";
             <h2>Capítulo <?php echo $capitulo; ?></h2>
             <?php
             foreach ($versiculos as $key => $value){
-                echo"<p>$value->versiculo : $value->texto.</p>";
+                echo"<p>$value->versiculo : $value->texto</p>";
             }
             ?>
         </div>
         <div class="col-md-5 order-md-1">
-            <img src="img/historico.png" />
+            <img src="img/versiculos.png" />
         </div>
     </div>
 
-
+    <hr class="featurette-divider">
 
 <?php
 

@@ -7,7 +7,7 @@
 
 <!-- FOOTER -->
         <footer class="container">
-            <p class="float-right"><a href="#">Back to top</a></p>
+            <p class="float-right"><a href="#">Subir</a></p>
             <p>2020 Bíblia Referências. &middot; <a href="http://sites.google.com/site/biblialivre" target="_blanck">
                 Bíblia Livre</a> &middot; 
                 <a href="https://creativecommons.org/licenses/by/3.0/br/" target="_blanck">

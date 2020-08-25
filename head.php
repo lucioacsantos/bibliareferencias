@@ -14,7 +14,7 @@ $url = 'http://localhost/bibliareferencias/';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Bíblia Referências">
     <meta name="author" content="99242991 Lúcio ALEXANDRE Correia dos Santos">
-    <?php echo "<link rel=\"icon\" href=\"$url/favicon.ico\">"; ?>
+    <?php echo "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"$url/favicon.ico\">"; ?>
 
     <title>...::: Bíblia Referências :::...</title>
 

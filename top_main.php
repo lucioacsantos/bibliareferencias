@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="novotestamento.php">Novo Testamento</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bibliografia.php">Bibliografia</a>
+                    </li>
                 </ul>
                 <form class="form-inline mt-2 mt-md-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Sua pesquisa" aria-label="Search">

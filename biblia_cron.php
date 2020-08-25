@@ -7,7 +7,8 @@
 require_once "class/queries.class.php";
 $cns = new ConsultaSQL();
 
-$prox_vers = $cns->select($tb_prox_vers,'','');
+$campos = "*";
+$prox_vers = $cns->select($campos,$tb_prox_vers,'','');
 $prox_at = $prox_vers->prox_at;
 $prox_nt = $prox_vers->prox_nt;
 $prox_sl_pv = $prox_vers->prox_sl_pv;
@@ -35,7 +36,5 @@ else{
 
 $campos_valores = "prox_at=$prox_at, prox_nt=$prox_nt, prox_sl_pv=$prox_sl_pv";
 $upd = $cns->update($tb_prox_vers,$campos_valores,'');
-
-
 
 ?>
