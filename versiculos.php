@@ -13,6 +13,7 @@ $cns = new ConsultaSQL();
 
 @$livro = $_GET["livro"];
 @$capitulo = $_GET["capitulo"];
+@$versiculo = $_GET["versiculo"];
 if ($capitulo == ''){ $capitulo = 1;}
 $condicao = "idtb_livros='$livro'";
 $livro = $cns->select('*',$tb_livros,$condicao,'');
@@ -21,7 +22,7 @@ $campos = "capitulo AS capitulos";
 $condicao = "idtb_livros='$livro->idtb_livros' GROUP BY capitulo";
 $capitulos = $cns->selectMulti($campos,$tb_versiculos,$condicao,'');
 
-$campos = "versiculo, texto";
+$campos = "idtb_versiculos, versiculo, texto";
 $condicao = "idtb_livros='$livro->idtb_livros' AND capitulo='$capitulo'";
 $versiculos = $cns->selectMulti($campos,$tb_versiculos,$condicao,'');
 
@@ -83,7 +84,12 @@ include "top_main.php";
             <h2>Capítulo <?php echo $capitulo; ?></h2>
             <?php
             foreach ($versiculos as $key => $value){
-                echo"<p>$value->versiculo : $value->texto</p>";
+                if ($value->idtb_versiculos == $versiculo){
+                    echo"<p><b>$value->versiculo : $value->texto</b></p>";
+                }
+                else{
+                    echo"<p>$value->versiculo : $value->texto</p>";
+                }
             }
             ?>
         </div>

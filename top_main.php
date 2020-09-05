@@ -28,8 +28,9 @@
                         <a class="nav-link" href="bibliografia.php">Bibliografia</a>
                     </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Sua pesquisa" aria-label="Search">
+                <form class="form-inline mt-2 mt-md-0" action="pesquisa.php" method="post" enctype="multipart/form-data">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Sua pesquisa" 
+                        aria-label="Search" name="pesquisa" id="pesquisa">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Localizar</button>
                 </form>
             </div>

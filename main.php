@@ -52,7 +52,11 @@ $livro_sl_pv = $cns->select($campos,$tb_livros,$condicoes,'');
                                 <?php echo "$vers_at->texto $livro_at->nome $vers_at->capitulo : 
                                     $vers_at->versiculo"; ?>
                             </p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Contexto</a></p>
+                            <?php echo "
+                            <p><a class=\"btn btn-lg btn-primary\" 
+                                href=\"versiculos.php?livro=$vers_at->idtb_livros&capitulo=$vers_at->capitulo
+                                &versiculo=$vers_at->idtb_versiculos\" role=\"button\">Contexto</a></p>";
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -65,7 +69,11 @@ $livro_sl_pv = $cns->select($campos,$tb_livros,$condicoes,'');
                                 <?php echo "$vers_nt->texto $livro_nt->nome $vers_nt->capitulo : 
                                     $vers_nt->versiculo"; ?>
                             </p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Contexto</a></p>
+                            <?php echo"
+                            <p><a class=\"btn btn-lg btn-primary\" 
+                                href=\"versiculos.php?livro=$vers_nt->idtb_livros&capitulo=$vers_nt->capitulo
+                                &versiculo=$vers_nt->idtb_versiculos\" role=\"button\">Contexto</a></p>";
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -78,7 +86,11 @@ $livro_sl_pv = $cns->select($campos,$tb_livros,$condicoes,'');
                                 <?php echo "$vers_sl_pv->texto $livro_sl_pv->nome $vers_sl_pv->capitulo : 
                                     $vers_sl_pv->versiculo"; ?>
                             </p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Contexto</a></p>
+                            <?php echo"
+                            <p><a class=\"btn btn-lg btn-primary\" 
+                                href=\"versiculos.php?livro=$vers_sl_pv->idtb_livros&capitulo=$vers_sl_pv->capitulo 
+                                &versiculo=$vers_sl_pv->idtb_versiculos\" role=\"button\">Contexto</a></p>";
+                            ?>
                         </div>
                     </div>
                 </div>
