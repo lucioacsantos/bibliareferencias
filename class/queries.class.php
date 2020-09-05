@@ -14,6 +14,12 @@ $tb_prox_vers="tb_prox_vers";
 class ConsultaSQL
 {
 
+    public function SelectAllLivros()
+    {
+        require_once "mysqli.class.php";
+        $my = new MySQL();
+    }
+
     public function insert($tabela,$campos,$valores) 
     {
         require_once "mysqli.class.php";
