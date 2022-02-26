@@ -24,7 +24,7 @@ if ($prox_nt < 31102){
     $prox_nt++;
 }
 else{
-    $prox_nt = 1;
+    $prox_nt = 23146;
 }
 
 if ($prox_sl_pv < 17316){
