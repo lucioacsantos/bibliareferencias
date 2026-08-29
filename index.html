@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bíblia Sagrada | Leitura Serena</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            zen: {
+              bg: '#0B0F17',         // Fundo escuro profundo e sereno
+              surface: '#121824',    // Superfície de cartões
+              surfaceHover: '#1B2436',
+              border: '#1F293D',
+              text: '#E2E8F0',       // Texto suave, sem contraste agressivo
+              muted: '#8B9BB4',      // Texto secundário
+              accent: '#38BDF8',     // Destaque ciano suave
+              accentDark: '#0369A1',
+              gold: '#FBBF24',       // Ícones e marcações
+              sage: '#34D399'        // Verde tranquilidade
+            }
+          },
+          fontFamily: {
+            serif: ['Lora', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0B0F17;
+      color: #E2E8F0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .verse-text {
+      font-family: 'Lora', serif;
+      line-height: 1.85;
+    }
+    /* Scrollbar minimalista */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1F293D;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #38BDF8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-zen-accent/20 selection:text-zen-accent">
+
+  <header class="sticky top-0 z-40 bg-zen-bg/90 backdrop-blur-md border-b border-zen-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      
+      <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl bg-zen-surface border border-zen-border flex items-center justify-center text-zen-gold group-hover:border-zen-gold/40 transition-colors">
+          <i data-lucide="book-open" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="font-display font-bold text-lg tracking-wider text-slate-100 block leading-tight">BÍBLIA LIVRE</span>
+          <span class="text-[10px] uppercase tracking-widest text-zen-muted block">Leitura Serena</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-1 bg-zen-surface p-1 rounded-xl border border-zen-border text-sm">
+        <button onclick="navigateTo('home')" class="nav-btn px-4 py-1.5 rounded-lg text-zen-muted hover:text-white transition" data-view="home">Início</button>
+        <button onclick="navigateTo('testamento', 1)" class="nav-btn px-4 py-1.5 rounded-lg text-zen-muted hover:text-white transition" data-view="at">Antigo Testamento</button>
+        <button onclick="navigateTo('testamento', 2)" class="nav-btn px-4 py-1.5 rounded-lg text-zen-muted hover:text-white transition" data-view="nt">Novo Testamento</button>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zen-surface hover:bg-zen-surfaceHover border border-zen-border text-zen-muted hover:text-zen-text text-sm transition">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Buscar versículo ou livro...</span>
+          <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-zen-bg rounded border border-zen-border text-zen-muted font-mono">⌘K</kbd>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app-content" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
+    </main>
+
+  <div id="search-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-start justify-center p-4 pt-16 sm:pt-24">
+    <div class="bg-zen-surface border border-zen-border w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+      
+      <div class="p-4 border-b border-zen-border flex items-center gap-3">
+        <i data-lucide="search" class="w-5 h-5 text-zen-accent"></i>
+        <input 
+          id="search-input" 
+          type="text" 
+          placeholder="Digite um termo, livro ou capítulo (ex: 'amor', 'Gn 1:1', 'Mateus')..."
+          class="bg-transparent text-slate-100 placeholder:text-zen-muted focus:outline-none w-full text-base"
+          oninput="handleSearch(this.value)"
+        />
+        <button onclick="closeSearchModal()" class="text-zen-muted hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="search-results" class="p-4 overflow-y-auto space-y-3 flex-1">
+        <p class="text-sm text-zen-muted text-center py-6">Digite ao menos 3 caracteres para iniciar a busca.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto border-t border-zen-border/50 py-6 text-center text-xs text-zen-muted">
+    <p>Bíblia Livre • Projetado para leitura imersiva e reflexão.</p>
+  </footer>
+
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-zen-surface/95 backdrop-blur border-t border-zen-border flex justify-around p-2 text-xs">
+    <button onclick="navigateTo('home')" class="flex flex-col items-center gap-1 p-2 text-zen-muted hover:text-zen-accent">
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <span>Início</span>
+    </button>
+    <button onclick="navigateTo('testamento', 1)" class="flex flex-col items-center gap-1 p-2 text-zen-muted hover:text-zen-accent">
+      <i data-lucide="scroll" class="w-5 h-5"></i>
+      <span>A.T.</span>
+    </button>
+    <button onclick="navigateTo('testamento', 2)" class="flex flex-col items-center gap-1 p-2 text-zen-muted hover:text-zen-accent">
+      <i data-lucide="book-marked" class="w-5 h-5"></i>
+      <span>N.T.</span>
+    </button>
+    <button onclick="openSearchModal()" class="flex flex-col items-center gap-1 p-2 text-zen-muted hover:text-zen-accent">
+      <i data-lucide="search" class="w-5 h-5"></i>
+      <span>Buscar</span>
+    </button>
+  </div>
+
+  <script>
+    // Estado global da aplicação
+    let bibleData = null;
+    let currentView = 'home';
+    let selectedBook = null;
+    let selectedChapter = 1;
+
+    // Inicialização ao carregar
+    document.addEventListener('DOMContentLoaded', async () => {
+      lucide.createIcons();
+      await loadBibleData();
+      
+      // Atalho de teclado para busca (Cmd+K / Ctrl+K)
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearchModal();
+        }
+        if (e.key === 'Escape') closeSearchModal();
+      });
+    });
+
+    // Carregar arquivo JSON
+    async function loadBibleData() {
+      const container = document.getElementById('app-content');
+      container.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-20 text-center">
+          <div class="w-8 h-8 border-2 border-zen-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p class="text-zen-muted text-sm">Carregando as escrituras sagradas...</p>
+        </div>
+      `;
+      try {
+        const res = await fetch('biblia_livre.json');
+        const json = await res.json();
+        bibleData = json.tables;
+        navigateTo('home');
+      } catch (err) {
+        console.error("Erro ao carregar JSON:", err);
+        container.innerHTML = `
+          <div class="bg-zen-surface border border-red-500/30 rounded-2xl p-6 text-center max-w-md mx-auto">
+            <i data-lucide="alert-triangle" class="w-10 h-10 text-red-400 mx-auto mb-3"></i>
+            <h3 class="text-lg font-semibold text-white mb-2">Arquivo JSON não localizado</h3>
+            <p class="text-sm text-zen-muted mb-4">Certifique-se de que o arquivo <code>biblia_livre.json</code> está na mesma pasta desta página.</p>
+          </div>
+        `;
+        lucide.createIcons();
+      }
+    }
+
+    // ================= ROTAS E VIEWS =================
+    function navigateTo(view, param = null, paramExtra = null) {
+      currentView = view;
+      const content = document.getElementById('app-content');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (view === 'home') {
+        renderHomePage(content);
+      } else if (view === 'testamento') {
+        renderTestamentPage(content, param); // param = 1 (AT) ou 2 (NT)
+      } else if (view === 'livro') {
+        selectedBook = bibleData.tb_livros.find(l => l.idtb_livros === param);
+        selectedChapter = paramExtra || 1;
+        renderBookPage(content, selectedBook, selectedChapter);
+      }
+      lucide.createIcons();
+    }
+
+    // 1. LANDING PAGE / HOME
+    function renderHomePage(container) {
+      // Obter versículo do dia aleatório
+      const totalVers = bibleData.tb_versiculos.length;
+      const randomIdx = Math.floor(Math.random() * totalVers);
+      const vDia = bibleData.tb_versiculos[randomIdx];
+      const bookDia = bibleData.tb_livros.find(l => l.idtb_livros === vDia.idtb_livros);
+
+      container.innerHTML = `
+        <div class="space-y-12">
+          
+          <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zen-surface via-zen-surface to-zen-border/40 border border-zen-border p-6 sm:p-10 shadow-2xl">
+            <div class="absolute -top-12 -right-12 w-64 h-64 bg-zen-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex items-center gap-2 text-zen-gold text-xs font-semibold tracking-wider uppercase mb-4">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Palavra de Reflexão do Dia</span>
+            </div>
+
+            <blockquote class="verse-text text-xl sm:text-2xl md:text-3xl text-slate-100 font-medium italic mb-6 leading-relaxed">
+              “${vDia.texto}”
+            </blockquote>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-zen-border/60">
+              <div class="text-sm font-semibold text-zen-accent">
+                ${bookDia.nome} ${vDia.capitulo}:${vDia.versiculo}
+              </div>
+              <button 
+                onclick="navigateTo('livro', ${bookDia.idtb_livros}, ${vDia.capitulo})"
+                class="inline-flex items-center gap-2 text-xs font-medium bg-zen-surfaceHover hover:bg-zen-accent hover:text-zen-bg border border-zen-border hover:border-transparent px-4 py-2 rounded-xl transition duration-200">
+                <span>Ler capítulo completo</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div onclick="navigateTo('testamento', 1)" class="group cursor-pointer rounded-2xl bg-zen-surface border border-zen-border p-6 hover:border-zen-accent/50 hover:bg-zen-surfaceHover transition-all duration-300">
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-zen-border/60 flex items-center justify-center text-zen-gold group-hover:scale-110 transition-transform">
+                  <i data-lucide="scroll" class="w-6 h-6"></i>
+                </div>
+                <span class="text-xs font-mono text-zen-muted">39 Livros</span>
+              </div>
+              <h2 class="font-display text-xl font-bold text-white mb-2">Antigo Testamento</h2>
+              <p class="text-sm text-zen-muted line-clamp-2">
+                A criação, a lei, a história e os escritos poéticos e proféticos do povo de Israel.
+              </p>
+            </div>
+
+            <div onclick="navigateTo('testamento', 2)" class="group cursor-pointer rounded-2xl bg-zen-surface border border-zen-border p-6 hover:border-zen-accent/50 hover:bg-zen-surfaceHover transition-all duration-300">
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-zen-border/60 flex items-center justify-center text-zen-sage group-hover:scale-110 transition-transform">
+                  <i data-lucide="book-marked" class="w-6 h-6"></i>
+                </div>
+                <span class="text-xs font-mono text-zen-muted">27 Livros</span>
+              </div>
+              <h2 class="font-display text-xl font-bold text-white mb-2">Novo Testamento</h2>
+              <p class="text-sm text-zen-muted line-clamp-2">
+                Os evangelhos, a história da igreja primitiva, as epístolas apostólicas e a revelação.
+              </p>
+            </div>
+
+          </section>
+        </div>
+      `;
+    }
+
+    // 2. VIEW: LISTA DOS LIVROS DO TESTAMENTO
+    function renderTestamentPage(container, testamentId) {
+      const isAT = testamentId === 1;
+      const title = isAT ? "Antigo Testamento" : "Novo Testamento";
+      const books = bibleData.tb_livros.filter(l => l.idtb_testamentos === testamentId);
+
+      container.innerHTML = `
+        <div class="space-y-8">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zen-border pb-6">
+            <div>
+              <button onclick="navigateTo('home')" class="inline-flex items-center gap-1 text-xs text-zen-muted hover:text-zen-accent mb-2">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i> Voltar ao início
+              </button>
+              <h1 class="font-display text-2xl sm:text-3xl font-bold text-white">${title}</h1>
+            </div>
+            <span class="text-sm text-zen-muted font-mono bg-zen-surface px-3 py-1.5 rounded-xl border border-zen-border self-start sm:self-auto">
+              ${books.length} Livros canônicos
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${books.map((book, idx) => `
+              <div 
+                onclick="navigateTo('livro', ${book.idtb_livros}, 1)"
+                class="group cursor-pointer rounded-2xl bg-zen-surface border border-zen-border p-5 hover:border-zen-accent/40 hover:bg-zen-surfaceHover transition-all flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-mono text-zen-muted">${idx + 1}.</span>
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-zen-border/70 text-zen-accent">${book.abrev}</span>
+                  </div>
+                  <h3 class="font-semibold text-lg text-white group-hover:text-zen-accent transition-colors">${book.nome}</h3>
+                  <p class="text-xs text-zen-muted mt-2 line-clamp-3 leading-relaxed">${book.descricao}</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-zen-border/40 flex items-center justify-between text-xs text-zen-accent">
+                  <span>Abrir livro</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+        </div>
+      `;
+    }
+
+    // 3. VIEW: PÁGINA DO LIVRO (DESCRIÇÃO, SELETOR DE CAPÍTULO E VERSÍCULOS)
+    function renderBookPage(container, book, chapterNum) {
+      // Obter todos os versículos do livro
+      const bookVerses = bibleData.tb_versiculos.filter(v => v.idtb_livros === book.idtb_livros);
+      
+      // Lista de capítulos disponíveis no livro
+      const chapters = [...new Set(bookVerses.map(v => v.capitulo))].sort((a, b) => a - b);
+      
+      // Versículos do capítulo selecionado
+      const currentChapterVerses = bookVerses.filter(v => v.capitulo === chapterNum);
+
+      container.innerHTML = `
+        <div class="space-y-8 max-w-4xl mx-auto">
+          
+          <div>
+            <div class="flex items-center gap-2 text-xs text-zen-muted mb-2">
+              <button onclick="navigateTo('testamento', ${book.idtb_testamentos})" class="hover:text-zen-accent">
+                ${book.idtb_testamentos === 1 ? 'Antigo Testamento' : 'Novo Testamento'}
+              </button>
+              <span>/</span>
+              <span class="text-zen-text font-medium">${book.nome}</span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">${book.nome}</h1>
+          </div>
+
+          <div class="bg-zen-surface border border-zen-border rounded-2xl p-5 sm:p-6 text-sm text-zen-muted leading-relaxed">
+            <div class="flex items-center gap-2 text-zen-accent font-semibold text-xs uppercase tracking-wider mb-2">
+              <i data-lucide="info" class="w-4 h-4"></i>
+              <span>Introdução Histórica & Teológica</span>
+            </div>
+            <p>${book.descricao}</p>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-xs uppercase tracking-wider text-zen-muted font-semibold">Capítulos:</span>
+            <div class="flex flex-wrap gap-2 pt-1 max-h-36 overflow-y-auto pr-1">
+              ${chapters.map(c => `
+                <button 
+                  onclick="navigateTo('livro', ${book.idtb_livros}, ${c})"
+                  class="w-9 h-9 rounded-xl text-sm font-medium transition ${c === chapterNum ? 'bg-zen-accent text-zen-bg font-bold shadow-lg shadow-zen-accent/20' : 'bg-zen-surface border border-zen-border text-zen-muted hover:text-white hover:border-zen-accent/40'}">
+                  ${c}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-zen-border">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-lg font-semibold text-white">Capítulo ${chapterNum}</h2>
+              <span class="text-xs text-zen-muted font-mono">${currentChapterVerses.length} versículos</span>
+            </div>
+
+            <div class="space-y-4">
+              ${currentChapterVerses.map(v => `
+                <div class="flex items-baseline gap-3 group p-2 rounded-xl hover:bg-zen-surface/40 transition">
+                  <span class="text-xs font-mono font-semibold text-zen-accent select-none w-6 text-right shrink-0">${v.versiculo}</span>
+                  <p class="verse-text text-base sm:text-lg text-slate-200 leading-relaxed">${v.texto}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-6 border-t border-zen-border">
+            ${chapterNum > 1 ? `
+              <button onclick="navigateTo('livro', ${book.idtb_livros}, ${chapterNum - 1})" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zen-surface border border-zen-border hover:border-zen-accent text-xs font-medium">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i> Capítulo Anterior
+              </button>
+            ` : '<div></div>'}
+
+            ${chapterNum < chapters.length ? `
+              <button onclick="navigateTo('livro', ${book.idtb_livros}, ${chapterNum + 1})" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zen-surface border border-zen-border hover:border-zen-accent text-xs font-medium">
+                Próximo Capítulo <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            ` : '<div></div>'}
+          </div>
+
+        </div>
+      `;
+    }
+
+    // ================= BUSCA INTELIGENTE =================
+    function openSearchModal() {
+      document.getElementById('search-modal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('search-input').focus(), 100);
+    }
+
+    function closeSearchModal() {
+      document.getElementById('search-modal').classList.add('hidden');
+      document.getElementById('search-input').value = '';
+    }
+
+    function handleSearch(query) {
+      const resultsContainer = document.getElementById('search-results');
+      const clean = query.trim().toLowerCase();
+
+      if (clean.length < 3) {
+        resultsContainer.innerHTML = `<p class="text-sm text-zen-muted text-center py-6">Digite ao menos 3 caracteres...</p>`;
+        return;
+      }
+
+      // 1. Verificar se é busca por nome de livro
+      const matchedBooks = bibleData.tb_livros.filter(b => 
+        b.nome.toLowerCase().includes(clean) || b.abrev.toLowerCase() === clean
+      );
+
+      // 2. Busca textual nos versículos (limitada aos primeiros 20 resultados para performance)
+      const matchedVerses = bibleData.tb_versiculos.filter(v => 
+        v.texto.toLowerCase().includes(clean)
+      ).slice(0, 20);
+
+      if (matchedBooks.length === 0 && matchedVerses.length === 0) {
+        resultsContainer.innerHTML = `<p class="text-sm text-zen-muted text-center py-6">Nenhum resultado encontrado para "<strong>${query}</strong>".</p>`;
+        return;
+      }
+
+      let html = '';
+
+      // Renderizar Livros encontrados
+      if (matchedBooks.length > 0) {
+        html += `<div class="mb-3 text-[11px] font-semibold tracking-wider uppercase text-zen-gold">Livros Encontrados</div>`;
+        html += matchedBooks.map(b => `
+          <div onclick="navigateTo('livro', ${b.idtb_livros}, 1); closeSearchModal();" class="p-3 bg-zen-bg rounded-xl border border-zen-border hover:border-zen-accent cursor-pointer mb-2">
+            <div class="font-semibold text-white text-sm">${b.nome} (${b.abrev})</div>
+            <div class="text-xs text-zen-muted line-clamp-1">${b.descricao}</div>
+          </div>
+        `).join('');
+      }
+
+      // Renderizar Versículos encontrados
+      if (matchedVerses.length > 0) {
+        html += `<div class="mt-4 mb-3 text-[11px] font-semibold tracking-wider uppercase text-zen-accent">Versículos</div>`;
+        html += matchedVerses.map(v => {
+          const b = bibleData.tb_livros.find(l => l.idtb_livros === v.idtb_livros);
+          return `
+            <div onclick="navigateTo('livro', ${b.idtb_livros}, ${v.capitulo}); closeSearchModal();" class="p-3 bg-zen-bg rounded-xl border border-zen-border hover:border-zen-accent cursor-pointer mb-2">
+              <div class="text-xs font-semibold text-zen-accent mb-1">${b.nome} ${v.capitulo}:${v.versiculo}</div>
+              <div class="text-xs text-slate-300 font-serif line-clamp-2">“${v.texto}”</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      resultsContainer.innerHTML = html;
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
