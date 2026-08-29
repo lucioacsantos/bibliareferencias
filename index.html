@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bíblia Sagrada | Leitura Serena</title>
+  <title>Bíblia Referências | Leitura Serena</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -78,7 +78,7 @@
           <i data-lucide="book-open" class="w-5 h-5"></i>
         </div>
         <div>
-          <span class="font-display font-bold text-lg tracking-wider text-slate-100 block leading-tight">BÍBLIA LIVRE</span>
+          <span class="font-display font-bold text-lg tracking-wider text-slate-100 block leading-tight">BÍBLIA REFERÊNCIAS</span>
           <span class="text-[10px] uppercase tracking-widest text-zen-muted block">Leitura Serena</span>
         </div>
       </a>
@@ -126,7 +126,27 @@
   </div>
 
   <footer class="mt-auto border-t border-zen-border/50 py-6 text-center text-xs text-zen-muted">
-    <p>Bíblia Livre • Projetado para leitura imersiva e reflexão.</p>
+    <p>
+      Baseado no projeto 
+      <!-- Elemento com Tooltip -->
+      <span class="relative inline-block group cursor-help text-zen-text underline decoration-zen-border hover:decoration-zen-accent transition-colors">
+        Bíblia Livre
+        
+        <!-- Balão de Informações / Termos de Uso -->
+        <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 sm:w-80 p-3.5 bg-zen-surface border border-zen-border rounded-xl shadow-2xl text-left text-[11px] leading-relaxed text-slate-300 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out z-50 transform group-hover:-translate-y-1 block">
+          <span class="font-semibold text-zen-gold block mb-1">Termos de Uso & Licença:</span>
+          Todas as Escrituras em português citadas são da Bíblia Livre (BLIVRE), Copyright © Diego Santos, Mario Sérgio, e Marco Teles, 
+          <a href="http://sites.google.com/site/biblialivre/" target="_blank" rel="noopener noreferrer" class="text-zen-accent hover:underline">http://sites.google.com/site/biblialivre/</a> - fevereiro de 2018. 
+          Licença Creative Commons Atribuição 3.0 Brasil (<a href="http://creativecommons.org/licenses/by/3.0/br/" target="_blank" rel="noopener noreferrer" class="text-zen-accent hover:underline">http://creativecommons.org/licenses/by/3.0/br/</a>). 
+          Reprodução permitida desde que devidamente mencionados fonte e autores.
+          
+          <!-- Seta inferior do balão -->
+          <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-4 border-transparent border-t-zen-border"></span>
+          <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-[2px] border-4 border-transparent border-t-zen-surface"></span>
+        </span>
+      </span>
+      • Projetado para leitura imersiva e reflexão.
+    </p>
   </footer>
 
   <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-zen-surface/95 backdrop-blur border-t border-zen-border flex justify-around p-2 text-xs">
