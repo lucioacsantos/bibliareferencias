@@ -1,0 +1,17 @@
+server {
+    listen \${PORT};
+    server_name localhost;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html;
+        try_files \$uri \$uri/ /index.html;
+    }
+
+    # Cache para arquivos estáticos
+    location ~* \.(json|css|js)$ {
+        root /usr/share/nginx/html;
+        expires 1d;
+        add_header Cache-Control "public, no-transform";
+    }
+}

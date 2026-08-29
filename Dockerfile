@@ -4,25 +4,8 @@ FROM nginx:alpine
 RUN echo 'gzip on; gzip_types text/plain application/json application/javascript text/css;' > /etc/nginx/conf.d/gzip.conf
 
 # Configuração do Nginx ajustada para o Cloud Run (porta dinâmica $PORT)
-COPY <<EOF /etc/nginx/templates/default.conf.template
-server {
-    listen \${PORT};
-    server_name localhost;
-
-    location / {
-        root   /usr/share/nginx/html;
-        index  index.html;
-        try_files \$uri \$uri/ /index.html;
-    }
-
-    # Cache para arquivos estáticos
-    location ~* \.(json|css|js)$ {
-        root /usr/share/nginx/html;
-        expires 1d;
-        add_header Cache-Control "public, no-transform";
-    }
-}
-EOF
+RUN mkdir -p /etc/nginx/templates/
+COPY default.conf.template /etc/nginx/templates/default.conf.template
 
 # Define a porta padrão exigida pelo Cloud Run caso $PORT não seja injetada
 ENV PORT=8080
